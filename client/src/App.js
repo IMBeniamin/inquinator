@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Map setTooltipContent={setContent} />
-      <ReactTooltip>{content}</ReactTooltip>
+      <ReactTooltip html={true}>{content}</ReactTooltip>
     </div>
   );
 }

@@ -1,6 +1,0 @@
-[submodule "modules"]
-	path = modules
-	url = https://github.com/owid/co2-data.git
-[submodule "vendor/data"]
-	path = vendor/data
-	url = https://github.com/owid/co2-data.git
