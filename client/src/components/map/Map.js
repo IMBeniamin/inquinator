@@ -39,6 +39,7 @@ const MapChart = ({ setTooltipContent }) => {
                   const current = data.find(
                     (s) =>
                       s.iso_code === geo.properties.ISO_A3 && s.year === "2020"
+                    // meglio lato server passndo filtri in post/get
                   );
                   console.log(current);
                   return (
