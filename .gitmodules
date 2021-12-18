@@ -1,0 +1,3 @@
+[submodule "client/public/data"]
+	path = client/public/data
+	url = https://github.com/owid/co2-data.git
