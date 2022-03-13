@@ -7,7 +7,6 @@ import {
 } from "react-simple-maps";
 import { scaleLinear } from "d3-scale";
 import { interpolateCubehelixLong } from "d3";
-import { response } from "express";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -21,28 +20,19 @@ const MapChart = ({ setTooltipContent }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    /*
-    csv("/data/owid-co2-data.csv").then((data) => {
-      // todo refator so the data is queried from the server
-      // file origin: https://github.com/owid/co2-data
-      setData(data);
-      console.log(data);
-    });
-    */
-    fetch("http://localhost:82/API/",{
+    fetch("http://localhost/API/",{
       method: 'GET', 
       headers: {
         'Content-Type': 'application/json',
     },
     }).then(res => res.json())
-    .then(json => console.log(json))
-    
-    
-  },[data]); 
+    .then(data => setData(data))  
+  },[]);
+
   return (
     <>
       <ComposableMap data-tip="" projectionConfig={{ scale: 100 }}>
-        {data.length > 0 && (
+        {data.length> 0 && (
           <ZoomableGroup center={[0, 0]}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
