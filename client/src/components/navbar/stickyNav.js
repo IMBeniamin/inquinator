@@ -1,23 +1,41 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
 import Slider from '@mui/material/Slider';
 
-function valuetext(value) {
-  return `${value}°C`;
-}
+export default function TimeSlider() {
+  const [value, setValue] = React.useState(2020);
 
-export default function DiscreteSliderSteps() {
+  const handleChange = (event, newValue) => {
+    if (typeof newValue === 'number') {
+      setValue(newValue);
+      fetch(`http://localhost/API/${newValue}`,{
+          "method":"GET",
+          "headers": {
+              "Content-Type":"application/json"
+          }
+      })
+      .then(res => res.json())
+      .then()
+    }
+  };
   return (
-    <Box sx={{ width: 1500 }}>
+    <Box className='slider-container'>
       <Slider
-        aria-label="Small steps"
-        defaultValue={2020}
-        getAriaValueText={valuetext}
+        sx={{
+          '& input[type="range"]': {
+            WebkitAppearance: 'slider-vertical',
+          },
+        }}
+        orientation="vertical"
+        size="small"
+        aria-label="Year"
+        defaultValue={value}
+        valueLabelDisplay="auto"
         step={1}
         marks
-        min={1860}
-        max={2021}
-        valueLabelDisplay="auto"
+        min={1950}
+        max={2020}
       />
     </Box>
   );

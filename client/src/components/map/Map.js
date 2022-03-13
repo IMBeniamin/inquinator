@@ -20,7 +20,7 @@ const MapChart = ({ setTooltipContent }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost/API/",{
+    fetch("http://localhost/API/2020",{
       method: 'GET', 
       headers: {
         'Content-Type': 'application/json',
@@ -31,9 +31,9 @@ const MapChart = ({ setTooltipContent }) => {
 
   return (
     <>
-      <ComposableMap data-tip="" projectionConfig={{ scale: 100 }}>
+      <ComposableMap data-tip="" projectionConfig={{ scale: 750 }}>
         {data.length> 0 && (
-          <ZoomableGroup center={[0, 0]}>
+          <ZoomableGroup center={[13, 45]}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map((geo) => {
@@ -42,7 +42,6 @@ const MapChart = ({ setTooltipContent }) => {
                       s.iso_code === geo.properties.ISO_A3
                     // meglio lato server passndo filtri in post/get
                   );
-                  console.log(current);
                   return (
                     <Geography
                       key={geo.rsmKey}
@@ -51,14 +50,9 @@ const MapChart = ({ setTooltipContent }) => {
                         console.log(geo.properties);
                         const country = geo.properties.NAME;
                         const co2 = current ? current.co2 : "No data";
-                        setTooltipContent(
-                          `<h1>${country}</h1>
-                           <h3>co2:</h3> <p>${co2}</p>
-                          `
-                        );
                       }}
                       onMouseLeave={() => {
-                        setTooltipContent("");
+                        
                       }}
                       style={{
                         default: {
@@ -72,6 +66,10 @@ const MapChart = ({ setTooltipContent }) => {
                         hover: {
                           fill: current ? colorScale(current.co2) : "#fff",
                           outline: "none",
+                          stroke: "#fff",
+                          strokeOpacity: 1,
+                          strokeWidth: 2,
+                          cursor: "pointer",
                         },
                         pressed: {
                           fill: "#a0acb3",

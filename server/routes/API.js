@@ -6,8 +6,8 @@ const Api = require('../model/api');
 
 
 router.options('*', cors());
-router.get('/', (req,res) => {
-    const states = Api.find({year:'2020'}, (error,country) => {
+router.get('/:year', (req,res) => {
+    const states = Api.find({year:req.params.year}, (error,country) => {
 
             if(error){
                 res.send(error)

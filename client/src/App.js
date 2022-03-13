@@ -1,21 +1,27 @@
 import "./App.css";
 
 import { useState } from "react";
-import ReactTooltip from "react-tooltip";
-import Nav from "./components/navbar/stickyNav"
+import TimeSlider from "./components/navbar/stickyNav"
 import Map from "./components/map/Map";
 
 function App() {
   const [content, setContent] = useState("");
   return (
     <div className="App">
-      <div className='components'>
-        <div className="Nav">
-          <Nav/>
+      <div className="reactive-data">
+        <div className='map-container'>
+          <Map setTooltipContent={setContent} />
         </div>
-        <Map setTooltipContent={setContent} />
-      </div>  
-      <ReactTooltip html={true}>{content}</ReactTooltip>
+        <TimeSlider/>
+        <div className='reactive-tooltip'></div>
+      </div>
+      <div className="data-visualization">
+        <header></header>
+        <div className="graphics">
+          <div className="main-chart"></div>
+          <div className="secondary-chart"></div>
+        </div>
+      </div>      
     </div>
   );
 }
