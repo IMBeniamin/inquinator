@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useCallback } from "react";
 import {
   ZoomableGroup,
   ComposableMap,
@@ -21,14 +21,20 @@ const colorScale = scaleLinear()
 const MapChart = ({ setTooltipContent }) => {
   const [data, setData] = useState([]);
 
+  const changeData = useCallback(
+    (newData) => setData(newData)
+  )
+
   useEffect(() => {
+    
     fetch("http://localhost/API/2020",{
       method: 'GET', 
       headers: {
         'Content-Type': 'application/json',
-    },
+      }
     }).then(res => res.json())
-    .then(data => setData(data))  
+    .then(data => setData(data))
+      
   },[]);
 
   return (
@@ -86,7 +92,7 @@ const MapChart = ({ setTooltipContent }) => {
           </ZoomableGroup>
         )}
       </ComposableMap>
-        <TimeSlider />
+      <TimeSlider parentCallback = {changeData} year={2020}/>
     </>
 
   );

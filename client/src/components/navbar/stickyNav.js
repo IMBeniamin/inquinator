@@ -3,12 +3,13 @@ import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import Slider from '@mui/material/Slider';
 
-export default function TimeSlider() {
-  const [value, setValue] = React.useState(2020);
+export default function TimeSlider(props) {
+  const [value, setValue] = React.useState(props.year);
 
   const handleChange = (event, newValue) => {
     if (typeof newValue === 'number') {
       setValue(newValue);
+      
       fetch(`http://localhost/API/${newValue}`,{
           "method":"GET",
           "headers": {
@@ -16,7 +17,7 @@ export default function TimeSlider() {
           }
       })
       .then(res => res.json())
-      .then()
+      .then(data => props.parentCallback(data))
     }
   };
   return (
@@ -36,6 +37,7 @@ export default function TimeSlider() {
         marks
         min={1950}
         max={2020}
+        onChange={handleChange}
       />
     </Box>
   );

@@ -12,7 +12,6 @@ function App() {
         <div className='map-container'>
           <Map setTooltipContent={setContent} />
         </div>
-        <TimeSlider/>
         <div className='reactive-tooltip'></div>
       </div>
       <div className="data-visualization">
