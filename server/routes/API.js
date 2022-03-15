@@ -7,9 +7,8 @@ const { query } = require('express');
 
 
 router.options('*', cors());
-router.get('/:year', (req,res) => {
-    const states = Api.find({year: req.params.year, co2:{$ne: null}, iso_code: {$ne: null}},"-_id iso_code co2", (error,country) => {
-
+router.get('/', (req,res) => {
+    const states = Api.find({year: req.query.year, co2:{$ne: null}, iso_code: {$ne: null}},"-_id iso_code co2", (error,country) => {
             if(error){
                 res.send(error)
             }
@@ -17,8 +16,6 @@ router.get('/:year', (req,res) => {
             res.json(country)
         }
     )
-
-    
 })
 
 module.exports = router

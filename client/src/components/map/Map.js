@@ -8,7 +8,7 @@ import {
 import { scaleLinear } from "d3-scale";
 import { interpolateCubehelixLong } from "d3";
 import TimeSlider from "../navbar/stickyNav";
-import Box from '@mui/material/Box';
+import axios from 'axios'
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -26,15 +26,11 @@ const MapChart = ({ setTooltipContent }) => {
   )
 
   useEffect(() => {
-    
-    fetch("http://localhost/API/2020",{
-      method: 'GET', 
-      headers: {
-        'Content-Type': 'application/json',
+    axios.get('http://localhost/API/',{
+      params:{
+        year: 2020
       }
-    }).then(res => res.json())
-    .then(data => setData(data))
-      
+    }).then(res => setData(res.data))
   },[]);
 
   return (

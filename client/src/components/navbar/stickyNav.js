@@ -2,23 +2,31 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import Slider from '@mui/material/Slider';
+import axios from 'axios'
 
 export default function TimeSlider(props) {
+  let timeout;
   const [value, setValue] = React.useState(props.year);
 
-  const handleChange = (event, newValue) => {
-    if (typeof newValue === 'number') {
-      setValue(newValue);
-      
-      fetch(`http://localhost/API/${newValue}`,{
-          "method":"GET",
-          "headers": {
-              "Content-Type":"application/json"
-          }
+  const updateValue = (value) => {
+    if (typeof value === 'number') {
+      setValue(value);
+    
+      axios.get(`http://localhost/API/`,{
+        params:{
+          year: value
+        }
       })
-      .then(res => res.json())
-      .then(data => props.parentCallback(data))
+      .then(res => props.parentCallback(res.data))
     }
+  }
+
+  const handleChange = (event, value) => {
+    timeout && clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      console.log('change');
+      updateValue(value);  
+    }, 1000);
   };
   return (
     <Box className='slider-container'>

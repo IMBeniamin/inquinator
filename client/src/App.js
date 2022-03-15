@@ -17,8 +17,8 @@ function App() {
       <div className="data-visualization">
         <header></header>
         <div className="graphics">
-          <div className="main-chart"></div>
-          <div className="secondary-chart"></div>
+          <div className="main-chart"><canvas id="main"></canvas></div>
+          <div className="secondary-chart"><canvas id="secondary"></canvas></div>
         </div>
       </div>      
     </div>
