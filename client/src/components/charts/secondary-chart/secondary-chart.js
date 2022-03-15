@@ -4,14 +4,9 @@ import {Bar} from 'react-chartjs-2'
 firstChart = (props) =>{
     const [dataChart, setDataChart] = useState(Object)
     useEffect(() =>{
-        fetch(``,{
-            method: 'GET',
-            headers: {
-                "Content-Type": 'application/json'
-            },
-        })
-        .then()
-        .then()
+        
+        axios.get('').then()
+
     },[props.parentCallBack()])
 
     return(
