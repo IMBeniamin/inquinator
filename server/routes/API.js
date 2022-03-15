@@ -2,7 +2,7 @@ const { json } = require('body-parser');
 const express = require('express');
 const router = express.Router();
 const cors = require('cors');
-const Api = require('../model/api');
+const Api = require('../model/apiScheme');
 const { query } = require('express');
 
 

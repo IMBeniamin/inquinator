@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import {Bar} from 'react-chartjs-2'
 
-firstChart = (props) =>{
+const secondaryChart = (props) =>{
     const [dataChart, setDataChart] = useState(Object)
     useEffect(() =>{
         
         axios.get('').then()
 
-    },[props.parentCallBack()])
+    },[props.parentCallBack])
 
     return(
         <Bar />
     )
 }
+
+export default memo(secondaryChart)

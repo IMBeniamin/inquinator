@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {Bar} from 'react-chartjs-2'
 
-firstChart = (props) =>{
+const firstChart = (props) =>{
     const [dataChart, setDataChart] = useState(Object)
     useEffect(() =>{
 
@@ -13,3 +13,5 @@ firstChart = (props) =>{
         <Bar />
     )
 }
+
+export default memo(firstChart)

@@ -9,6 +9,8 @@ import { scaleLinear } from "d3-scale";
 import { interpolateCubehelixLong } from "d3";
 import TimeSlider from "../navbar/stickyNav";
 import axios from 'axios'
+import Card from '../infoCard/card'
+import { set } from "express/lib/application";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -20,6 +22,24 @@ const colorScale = scaleLinear()
 
 const MapChart = ({ setTooltipContent }) => {
   const [data, setData] = useState([]);
+  const [infoState,setInfoState] = useState({})
+
+  function binarySearch(arr, x, start, end){
+    if (start > end) return false;
+
+    let mid=Math.floor((start + end)/2);
+
+    if (arr[mid].iso_code===x) return arr[mid];
+
+    if(arr[mid].iso_code > x)
+        return binarySearch(arr, x, start, mid-1);
+    else
+        return binarySearch(arr, x, mid+1, end);
+  }
+
+  const changeInfoState  = useCallback(
+    (newState) => setInfoState(newState)
+  )
 
   const changeData = useCallback(
     (newData) => setData(newData)
@@ -30,11 +50,12 @@ const MapChart = ({ setTooltipContent }) => {
       params:{
         year: 2020
       }
-    }).then(res => setData(res.data))
+    }).then(res => setData( res.data.sort((a,b) => (a.iso_code > b.iso_code) ? 1 : ((b.iso_code > a.iso_code) ? -1 : 0))))
   },[]);
 
   return (
     <>
+      <TimeSlider parentCallback = {changeData} year={2020} />
       <ComposableMap data-tip="" projectionConfig={{ scale: 750 }}>
         {data.length> 0 && (
           <ZoomableGroup center={[13, 45]}>
@@ -54,6 +75,8 @@ const MapChart = ({ setTooltipContent }) => {
                         console.log(geo.properties);
                         const country = geo.properties.NAME;
                         const co2 = current ? current.co2 : "No data";
+                        setInfoState(binarySearch(data,geo.properties.ISO_A3,0,data.length - 1))
+                        console.log(infoState)
                       }}
                       onMouseLeave={() => {
                         
@@ -88,9 +111,9 @@ const MapChart = ({ setTooltipContent }) => {
           </ZoomableGroup>
         )}
       </ComposableMap>
-      <TimeSlider parentCallback = {changeData} year={2020}/>
+      <Card parentCallback={changeInfoState} stateInfo={infoState}/>  
     </>
-
+                 
   );
 };
 
