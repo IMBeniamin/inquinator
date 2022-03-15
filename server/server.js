@@ -15,7 +15,7 @@ app.use(helmet())
 app.use(compression())
 
 try {
-    mongoose.connect(process.env.DB_CONNESSIONE,() =>{
+    mongoose.connect(process.env.CONNECTION_STRING,() =>{
         console.log(`Connecting successfully with inquinator database`)
     })
 } catch (error) {
