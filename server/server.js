@@ -9,7 +9,7 @@ const compression = require('compression')
 require('dotenv/config');
 
 app.use(bodyParser.json())
-app.use('/API',apiCall)
+app.use('/httpapi',apiCall)
 app.use(cors())
 app.use(helmet())
 app.use(compression())
