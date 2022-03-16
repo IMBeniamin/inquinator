@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import Slider from '@mui/material/Slider';
 import axios from 'axios'
+import './stickyNav.css'
 
 export default function TimeSlider(props) {
   let timeout;

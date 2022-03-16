@@ -11,7 +11,7 @@ import TimeSlider from "../navbar/stickyNav";
 import axios from 'axios'
 import Card from '../infoCard/card'
 import { set } from "express/lib/application";
-
+import './map.css'
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
@@ -55,9 +55,11 @@ const MapChart = ({ setTooltipContent }) => {
 
   return (
     <>
-      <TimeSlider parentCallback = {changeData} year={2020} />
-      <ComposableMap data-tip="" projectionConfig={{ scale: 750 }}>
-        {data.length> 0 && (
+      <div className="map-container">
+        <TimeSlider parentCallback = {changeData} year={2020} />
+        <ComposableMap className="map" data-tip="" projectionConfig={{ scale: 750 }}>
+        {data.length> 0 && 
+        (
           <ZoomableGroup center={[13, 45]}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
@@ -111,9 +113,9 @@ const MapChart = ({ setTooltipContent }) => {
           </ZoomableGroup>
         )}
       </ComposableMap>
-      <Card parentCallback={changeInfoState} stateInfo={infoState}/>  
+      </div>
+      <Card className="infocard" parentCallback={changeInfoState} stateInfo={infoState}/>
     </>
-                 
   );
 };
 

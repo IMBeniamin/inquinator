@@ -9,10 +9,7 @@ function App() {
   return (
     <div className="App">
       <div className="reactive-data">
-        <div className='map-container'>
-          <Map setTooltipContent={setContent} />
-        </div>
-        <div className='reactive-tooltip'></div>
+        <Map setTooltipContent={setContent} />
       </div>
       <div className="data-visualization">
         <header></header>
