@@ -105,6 +105,7 @@ router.get("/", (req, res) => {
       } else if (Object.keys(error).length > 0) {
         res.status(400).send(error);
       } else {
+        filter["_id"] = false;
         res.status(200).json(db_data);
       }
     });
