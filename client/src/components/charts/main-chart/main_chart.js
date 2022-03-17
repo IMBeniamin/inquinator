@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import {Bar} from 'react-chartjs-2'
+import React, {
+  forwardRef,
+  useEffect,
+  useState,
+  useImperativeHandle,
+  memo,
+} from "react";
+// import { Bar } from "react-chartjs-2";
 
-const firstChart = (props) =>{
-    const [dataChart, setDataChart] = useState(Object)
-    useEffect(() =>{
+const MainChart = forwardRef((props, ref) => {
+  useEffect(() => {});
+  useImperativeHandle(ref, () => {
+    const updateData = (iso_country_code) => {
+      console.log("updateData with iso_country_code:", iso_country_code);
+    };
+  });
+  //   return <Bar />;
+});
 
-        axios.get('').then()
-        
-    },[props.parentCallBack()])
-
-    return(
-        <Bar />
-    )
-}
-
-export default memo(firstChart)
+export default memo(MainChart);
