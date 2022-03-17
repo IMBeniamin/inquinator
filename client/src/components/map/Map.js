@@ -45,9 +45,10 @@ const MapChart = ({ setTooltipContent }) => {
   )
 
   useEffect(() => {
-    axios.get('http://localhost/API/',{
+    axios.get('http://localhost/api/v1',{
       params:{
-        year: 2020
+        year: 2020,
+        filter: "iso_code,co2"
       }
     }).then(res => setData( res.data.sort((a,b) => (a.iso_code > b.iso_code) ? 1 : ((b.iso_code > a.iso_code) ? -1 : 0))))
   },[]);

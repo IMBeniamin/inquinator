@@ -13,9 +13,10 @@ export default function TimeSlider(props) {
     if (typeof value === 'number') {
       setValue(value);
     
-      axios.get(`http://localhost/API/`,{
+      axios.get(`http://localhost/api/v1`,{
         params:{
-          year: value
+          year: value,
+          filter: "iso_code,co2"
         }
       })
       .then(res => props.parentCallback(res.data))
