@@ -34,7 +34,9 @@ router.get("/", (req, res) => {
     ? req.query.filter.replace(/\s/g, "")
     : undefined;
   // console.log("raw filter is:", filter)
-  if (filter && filter_format.test(filter)) {
+  if (!filter) {
+    filter = {};
+  } else if (filter_format.test(filter)) {
     filter = filter.split(",");
   } else {
     filter = {};
@@ -49,11 +51,12 @@ router.get("/", (req, res) => {
     ? req.query.iso_code.replace(/\s/g, "").toUpperCase()
     : undefined;
   // console.log("raw iso_code is:", iso_code)
-  if (iso_code && iso_code_format.test(req.query.iso_code)) {
+  if (!iso_code) {
+    iso_code = undefined;
+  } else if (iso_code_format.test(req.query.iso_code)) {
     iso_code = iso_code.split(",");
     // console.log("formatted iso code is: ", iso_code)
   } else {
-    iso_code = undefined;
     error["iso_code"] = {
       message: "iso_code does not respect the {AAA,AAA,...} format",
     };
@@ -67,7 +70,9 @@ router.get("/", (req, res) => {
   let year_from = undefined;
   let year_to = undefined;
   // console.log("raw year is:", year)
-  if (year && year_format_list.test(year)) {
+  if (!year) {
+    year = undefined;
+  } else if (year_format_list.test(year)) {
     year = year.split(",");
     // console.log("formatted list year is:", year)
   } else if (year_format_range.test(year)) {
