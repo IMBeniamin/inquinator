@@ -6,21 +6,6 @@ const Api = require("../model/apiScheme");
 const { query } = require("express");
 
 router.options("*", cors());
-/*
-router.get('/', (req,res) => {
-    const states = Api.find({year: req.query.year, co2:{$ne: null}, iso_code: {$ne: null}},"-_id iso_code co2", (error,db_data
-      ) => {
-            if(error){
-                res.send(error)
-            }
-            console.log(db_data
-              )
-            res.json(db_data
-              )
-        }
-    )
-})
-*/
 
 router.get("/", (req, res) => {
   const sort = req.query.sort || {
