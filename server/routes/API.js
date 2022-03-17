@@ -96,7 +96,7 @@ router.get("/", (req, res) => {
     formatted_query[key] === undefined ? delete formatted_query[key] : {}
   );
   console.log(formatted_query, filter);
-
+  filter.push("-_id");
   Api.find(formatted_query, filter)
     .sort(sort)
     .exec((query_error, db_data) => {
@@ -105,7 +105,6 @@ router.get("/", (req, res) => {
       } else if (Object.keys(error).length > 0) {
         res.status(400).send(error);
       } else {
-        filter["_id"] = false;
         res.status(200).json(db_data);
       }
     });
