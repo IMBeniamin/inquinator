@@ -7,11 +7,10 @@ import './stickyNav.css'
 
 export default function TimeSlider(props) {
   let timeout;
-  const [value, setValue] = React.useState(props.year);
 
   const updateValue = (value) => {
     if (typeof value === 'number') {
-      setValue(value);
+      props.changeYear(value);
     
       axios.get(`http://localhost/api/v1`,{
         params:{
@@ -41,7 +40,7 @@ export default function TimeSlider(props) {
         orientation="vertical"
         size="small"
         aria-label="Year"
-        defaultValue={value}
+        defaultValue={2020}
         valueLabelDisplay="auto"
         step={1}
         marks
