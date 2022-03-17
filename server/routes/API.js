@@ -100,9 +100,9 @@ router.get("/", (req, res) => {
     .sort(sort)
     .exec((error, country) => {
       if (error) {
-        res.send(error);
+        res.status(503).send(error);
       }
-      res.json(country);
+      res.status(200).json(country);
     });
 });
 
