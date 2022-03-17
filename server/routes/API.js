@@ -4,6 +4,7 @@ const router = express.Router();
 const cors = require('cors');
 const Api = require('../model/apiScheme');
 const { query } = require('express');
+const {check, validatioResult} = require('express-validator')
 
 
 router.options('*', cors());
@@ -23,14 +24,14 @@ router.get('/', (req,res) => {
 router.get("/",(req,res) => {
     const sort = req.query.sort || {year: 'desc'}
 
+    var errors = {}
     // filter FORMATTING
     const filter_format = new RegExp('^(-?)\\w+(?:(,?)(?:\\1\\w+)){0,}$')
     let filter = req.query.filter ? req.query.filter.replace(/\s/g, '') : undefined
     // console.log("raw filter is:", filter)
     if (filter && filter_format.test(filter)) {
         filter = filter.split(',')
-    }
-    else {
+    }else{
         filter = {}
         // TODO error handling code for misformatted filter
     }
@@ -72,7 +73,7 @@ router.get("/",(req,res) => {
         // console.log("formatted range year is:", year_from, year_to)
     }
     else {
-        year = undefined
+        year = undefined    
         // TODO error handling code for misformatted year
     }
 
@@ -89,10 +90,12 @@ router.get("/",(req,res) => {
     
     Api.find(formatted_query,filter,{year: -1}).sort(sort).exec((error,country) => {
         if(error){
-            res.send(error)
+            res.status(503).send(error)
         }
-        res.json(country)
+        res.status(200).json(country)
     })
 })
+
+
 
 module.exports = router

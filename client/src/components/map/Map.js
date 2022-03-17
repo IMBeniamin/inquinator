@@ -10,7 +10,6 @@ import { interpolateCubehelixLong } from "d3";
 import TimeSlider from "../navbar/stickyNav";
 import axios from 'axios'
 import Card from '../infoCard/card'
-import { set } from "express/lib/application";
 import './map.css'
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
