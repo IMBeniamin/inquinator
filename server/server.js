@@ -9,7 +9,7 @@ const compression = require('compression')
 require('dotenv/config');
 
 app.use(bodyParser.json())
-app.use('/httpapi',apiCall)
+app.use('/api/v1/',apiCall)
 app.use(cors())
 app.use(helmet())
 app.use(compression())
@@ -24,5 +24,5 @@ try {
 
 const port = 80 || process.env.PORT
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`)
+    console.log(`Server listening on port ${port}`)
 })
