@@ -11,7 +11,6 @@ function App() {
   const stateUpdate = useCallback((state_iso_code) => {
     mainChartRef.current.updateData(state_iso_code);
   });
-  const [content, setContent] = useState("");
   return (
     <div className="App">
       <div className="reactive-data">
