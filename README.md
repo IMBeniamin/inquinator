@@ -1,5 +1,2 @@
-# inquinator
-React website to view the pollutions level globally per country
-
-## The api and client are hosted as separate submodules and can be cloned with the following command:
-## git clone https://github.com/IMBeniamin/inquinator.git --recurse-submodules
+# Legacy project.
+## Moved to [InquinAPI](https://github.com/IMBeniamin/inquinapi) and [Pollutinator](https://github.com/IMBeniamin/pollutinator)
