@@ -1,3 +1,5 @@
 # inquinator
 React website to view the pollutions level globally per country
-### Currently only the client side is available
+
+## The api and client are hosted as separate submodules and can be cloned with the following command:
+## git clone --include-submodules
