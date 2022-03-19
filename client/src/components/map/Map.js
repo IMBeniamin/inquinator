@@ -19,7 +19,7 @@ const colorScale = scaleLinear()
   .range(["lightgreen", "lightblue", "blue", "red"])
   .interpolate(interpolateCubehelixLong.gamma(1));
 
-const MapChart = ({ setTooltipContent }) => {
+const MapChart = (props) => {
   const [yearMap, setYearMap] = useState(2020);
   const [infoState, setInfoState] = useState([]);
 
@@ -71,9 +71,10 @@ const MapChart = ({ setTooltipContent }) => {
                         key={geo.rsmKey}
                         geography={geo}
                         onMouseEnter={() => {
-                          console.log(geo.properties);
-                          const country = geo.properties.NAME;
-                          const co2 = current ? current.co2 : "No data";
+                          console.log(current);
+                        }}
+                        onClick={() => {
+                          props.stateChange(current.iso_code);
                         }}
                         onMouseLeave={() => {}}
                         style={{

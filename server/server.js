@@ -1,14 +1,12 @@
 const express = require('express')
 const app = express()
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const apiCall = require('./routes/API')
 const cors = require('cors')
 const helmet = require('helmet')
 const compression = require('compression')
 require('dotenv/config');
 
-app.use(bodyParser.json())
 app.use('/api/v1/',apiCall)
 app.use(cors())
 app.use(helmet())

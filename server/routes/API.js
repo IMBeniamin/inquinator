@@ -1,9 +1,7 @@
-const { json } = require("body-parser");
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const Api = require("../model/apiScheme");
-const { query } = require("express");
 
 router.options("*", cors());
 
@@ -14,24 +12,24 @@ router.get("/", (req, res) => {
   let error = {};
 
   // filter FORMATTING
-  const filter_format = new RegExp("^(-?)\\w+(?:(,?)(?:\\1\\w+)){0,}$");
+  const filter_format = new RegExp("^(-?)\\w+(?:(,?)\\1\\w+)*$");
   let filter = req.query.filter
     ? req.query.filter.replace(/\s/g, "")
     : undefined;
   // console.log("raw filter is:", filter)
   if (!filter) {
-    filter = {};
+    filter = [];
   } else if (filter_format.test(filter)) {
     filter = filter.split(",");
   } else {
-    filter = {};
+    filter = [];
     error["filter"] = {
       message: "filter does not respect the {[-]field1,[-]field2,...} format",
     };
   }
 
   // iso_code FORMATTING
-  const iso_code_format = new RegExp("^\\w{3}(?:,\\w{3}){0,}$");
+  const iso_code_format = new RegExp("^\\w{3}(?:,\\w{3})*$");
   let iso_code = req.query.iso_code
     ? req.query.iso_code.replace(/\s/g, "").toUpperCase()
     : undefined;
@@ -48,7 +46,7 @@ router.get("/", (req, res) => {
   }
 
   // year FORMATTING
-  const year_format_list = new RegExp("^-?\\d+(?:,-?\\d+){0,}$");
+  const year_format_list = new RegExp("^-?\\d+(?:,-?\\d+)*$");
   const year_format_range = new RegExp("^(-?\\d+)-(-?\\d+)$");
   let year_type_range = false;
   let year = req.query.year;
