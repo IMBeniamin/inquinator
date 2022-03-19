@@ -1,6 +1,0 @@
-[submodule "inquinapi"]
-	path = inquinapi
-	url = https://github.com/IMBeniamin/inquinapi
-[submodule "pollutinator"]
-	path = pollutinator
-	url = https://github.com/IMBeniamin/pollutinator
